@@ -8,8 +8,9 @@ const ToDo = ({ _id, title, description, completed, toggleEdit, editItem }) => {
 
   const handleClick = () => {
     setLoading(true);
-    editItem({ _id, title, description, completed: !completed })
-      .then(setLoading(false));
+
+    editItem({ _id, completed: !completed })
+      .then(setLoading(false))
   }
 
   return (
