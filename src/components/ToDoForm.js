@@ -40,6 +40,11 @@ class ToDoForm extends React.Component {
       .then(this.setState({ loading: false }))
   }
 
+  handleDelete = () => {
+    this.setState({ loading: true })
+    this.props.deleteItem();
+  }
+
   render() {
     const { loading, title, description, _id } = this.state
 
@@ -53,18 +58,19 @@ class ToDoForm extends React.Component {
       <Form className='text-left' onSubmit={this.handleSubmit}>
         <Form.Group>
           <Form.Label>Title</Form.Label>
-          <Form.Control type="title" placeholder="Title" value={title} onChange={(e) => this.handleChange('title', e.target.value)} />
+          <Form.Control type="title" placeholder="Title" required={true} value={title} onChange={(e) => this.handleChange('title', e.target.value)} />
         </Form.Group>
 
         <Form.Group>
           <Form.Label>Description</Form.Label>
-          <Form.Control type="description" placeholder="Description" value={description} onChange={(e) => this.handleChange('description', e.target.value)} />
+          <Form.Control type="description" placeholder="Description" required={true} value={description} onChange={(e) => this.handleChange('description', e.target.value)} />
         </Form.Group>
+
         <ButtonToolbar>
           <Button variant="primary" className='mx-5' type="submit">
             Submit
           </Button>
-          {_id !== '' && <Button variant='danger' className='mx-5' onClick={this.props.deleteItem}>
+          {_id !== '' && <Button variant='danger' className='mx-5' onClick={this.handleDelete}>
             Delete
           </Button>}
           <Button variant="secondary" className='mx-5' onClick={this.props.toggleForm}>
